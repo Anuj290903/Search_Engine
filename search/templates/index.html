@@ -1,0 +1,21 @@
+{% block body %}
+    <form action="{% url 'search' %}" method="get">
+        <input type="text" name="q" value="{{ request.GET.q }}">
+        <input type="submit" value="Search">
+    </form>
+    {% if query %}
+        <h2>Results for "{{ query }}"</h2>
+        <ul>
+        {% for result in ranked_results %}
+            <li>
+                <strong>Name:</strong> {{ result.first_name }} {{ result.last_name }}<br>
+                <strong>Location:</strong> {{ result.location }}<br>
+                <strong>Headline:</strong> {{ result.headline }}<br>
+                <strong>Education:</strong> {{ result.school_name }}<br>
+                <strong>Experience:</strong> {{ result.title }} at {{ result.company_name }}<br>
+                <br>
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
